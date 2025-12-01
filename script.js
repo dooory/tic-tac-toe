@@ -51,8 +51,10 @@ const GameController = (() => {
 	const setRound = (number) => (round = number);
 	const setState = (newState) => (state = newState);
 	const setActivePlayer = (id) => (activePlayer = id);
+
 	const switchActivePlayer = () =>
 		activePlayer === 1 ? (activePlayer = 2) : (activePlayer = 1);
+	const incrementRound = () => setRound(getRound() + 1);
 
 	const resetGame = () => {
 		setRound(0);
@@ -60,12 +62,19 @@ const GameController = (() => {
 		GameBoard.resetBoard();
 	};
 
-	const playRound = (tileIndex) => {
-		const currentRound = getRound() + 1;
-		console.log(`Starting round ${currentRound}`);
+	const newRoundMessage = (round) => {
+		console.log(`Starting round ${round}`);
+		console.log(`It is currently Player ${getActivePlayer()}'s turn`);
+	};
 
-		GameBoard.doMove(tileIndex, getActivePlayer());
+	const playRound = (tileIndex) => {
+		console.clear();
+		GameBoard.doMove(Number(tileIndex), getActivePlayer());
 		switchActivePlayer();
+		incrementRound();
+
+		const nextRound = getRound() + 1;
+		newRoundMessage(nextRound);
 	};
 
 	const startGame = () => {
@@ -73,6 +82,10 @@ const GameController = (() => {
 		setState("playing");
 
 		console.log("Starting new game!");
+		const currentRound = getRound() + 1;
+		newRoundMessage(currentRound);
+
+		console.log(GameBoard.getBoard());
 	};
 
 	const endGame = () => {
@@ -95,6 +108,10 @@ const player2 = Player("Player 2", 2);
 
 GameController.startGame();
 
-GameController.playRound(1);
+for (let i = 1; i <= 9; i++) {
+	const chosenPosition = prompt("Choose a position");
 
-console.log(GameBoard.getBoard());
+	GameController.playRound(chosenPosition);
+
+	console.log(GameBoard.getBoard());
+}
