@@ -13,6 +13,12 @@ const GameBoard = (() => {
 	const getBoard = () => board;
 
 	const doMove = (position, playerId) => {
+		if (GameController.getState() === "idle") {
+			console.error("Game is currently in an idle state");
+
+			return false;
+		}
+
 		if (board[position] !== "") {
 			console.error(
 				`Board Position ${position} is already occupied by ${board[position]}`
@@ -43,7 +49,7 @@ const GameController = (() => {
 	const getActivePlayer = () => activePlayer;
 
 	const setRound = (number) => (round = number);
-	const setState = (state) => (state = state);
+	const setState = (newState) => (state = newState);
 	const setActivePlayer = (id) => (activePlayer = id);
 	const switchActivePlayer = () =>
 		activePlayer === 1 ? (activePlayer = 2) : (activePlayer = 1);
@@ -78,6 +84,7 @@ const GameController = (() => {
 		getActivePlayer,
 		resetGame,
 		startGame,
+		endGame,
 		playRound,
 	};
 })();
