@@ -33,7 +33,7 @@ const GameBoard = (() => {
 	return { doMove, getBoard, resetBoard };
 })();
 
-const GameController = () => {
+const GameController = (() => {
 	let round = 0;
 	let state = "idle";
 	let activePlayer = 1;
@@ -46,14 +46,22 @@ const GameController = () => {
 	const setState = (state) => (state = state);
 	const setActivePlayer = (id) => (activePlayer = id);
 
+	const resetGame = () => {
+		setRound(0);
+		setState("idle");
+		setActivePlayer(1);
+		GameBoard.resetBoard();
+	};
+
 	return {
 		getRound,
 		getState,
 		getActivePlayer,
+		resetGame,
 	};
-};
-
-GameBoard.resetBoard();
+})();
 
 const player1 = Player("Player 1", 1);
 const player2 = Player("Player 2", 2);
+
+GameController.resetGame();
