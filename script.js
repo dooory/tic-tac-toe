@@ -50,7 +50,6 @@ const GameController = (() => {
 
 	const resetGame = () => {
 		setRound(0);
-		setState("idle");
 		setActivePlayer(1);
 		GameBoard.resetBoard();
 	};
