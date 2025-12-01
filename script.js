@@ -42,6 +42,10 @@ const GameController = () => {
 	const getState = () => state;
 	const getActivePlayer = () => activePlayer;
 
+	const setRound = (number) => (round = number);
+	const setState = (state) => (state = state);
+	const setActivePlayer = (id) => (activePlayer = id);
+
 	return {
 		getRound,
 		getState,
