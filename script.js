@@ -57,6 +57,8 @@ const GameController = (() => {
 	const incrementRound = () => setRound(getRound() + 1);
 
 	const resetGame = () => {
+		console.log("Resetting game!");
+
 		setRound(0);
 		setActivePlayer(1);
 		GameBoard.resetBoard();
@@ -68,7 +70,6 @@ const GameController = (() => {
 	};
 
 	const playRound = (tileIndex) => {
-		console.clear();
 		GameBoard.doMove(Number(tileIndex), getActivePlayer());
 		switchActivePlayer();
 		incrementRound();
@@ -86,9 +87,11 @@ const GameController = (() => {
 		newRoundMessage(currentRound);
 
 		console.log(GameBoard.getBoard());
+		console.log("\n");
 	};
 
 	const endGame = () => {
+		console.log("Ending game!");
 		setState("idle");
 	};
 
@@ -108,10 +111,12 @@ const player2 = Player("Player 2", 2);
 
 GameController.startGame();
 
-for (let i = 1; i <= 9; i++) {
-	const chosenPosition = prompt("Choose a position");
-
-	GameController.playRound(chosenPosition);
+for (let i = 0; i < 9; i++) {
+	GameController.playRound(i);
 
 	console.log(GameBoard.getBoard());
 }
+
+GameController.endGame();
+
+GameController.resetGame();
