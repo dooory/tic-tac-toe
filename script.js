@@ -69,6 +69,10 @@ const GameController = (() => {
 		console.log("Starting new game!");
 	};
 
+	const endGame = () => {
+		setState("idle");
+	};
+
 	return {
 		getRound,
 		getState,
