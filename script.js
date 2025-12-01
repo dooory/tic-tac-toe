@@ -45,6 +45,8 @@ const GameController = (() => {
 	const setRound = (number) => (round = number);
 	const setState = (state) => (state = state);
 	const setActivePlayer = (id) => (activePlayer = id);
+	const switchActivePlayer = () =>
+		activePlayer === 1 ? (activePlayer = 2) : (activePlayer = 1);
 
 	const resetGame = () => {
 		setRound(0);
@@ -53,15 +55,35 @@ const GameController = (() => {
 		GameBoard.resetBoard();
 	};
 
+	const playRound = (tileIndex) => {
+		const currentRound = getRound() + 1;
+		console.log(`Starting round ${currentRound}`);
+
+		GameBoard.doMove(tileIndex, getActivePlayer());
+	};
+
+	const startGame = () => {
+		resetGame();
+		setState("playing");
+
+		console.log("Starting new game!");
+	};
+
 	return {
 		getRound,
 		getState,
 		getActivePlayer,
 		resetGame,
+		startGame,
+		playRound,
 	};
 })();
 
 const player1 = Player("Player 1", 1);
 const player2 = Player("Player 2", 2);
 
-GameController.resetGame();
+GameController.startGame();
+
+GameController.playRound(1);
+
+console.log(GameBoard.getBoard());
