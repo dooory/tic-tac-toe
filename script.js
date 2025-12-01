@@ -33,6 +33,22 @@ const GameBoard = (() => {
 	return { doMove, getBoard, resetBoard };
 })();
 
+const GameController = () => {
+	let round = 0;
+	let state = "idle";
+	let activePlayer = 1;
+
+	const getRound = () => round;
+	const getState = () => state;
+	const getActivePlayer = () => activePlayer;
+
+	return {
+		getRound,
+		getState,
+		getActivePlayer,
+	};
+};
+
 GameBoard.resetBoard();
 
 const player1 = Player("Player 1", 1);
