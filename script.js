@@ -13,9 +13,17 @@ const GameBoard = (() => {
 	const getBoard = () => board;
 
 	const doMove = (position, playerId) => {
+		if (board[position] !== "") {
+			console.error(
+				`Board Position ${position} is already occupied by ${board[position]}`
+			);
+
+			return false;
+		}
+
 		board[position] = playerId;
 
-		return board;
+		return true;
 	};
 
 	const resetBoard = () => {
@@ -24,6 +32,8 @@ const GameBoard = (() => {
 
 	return { doMove, getBoard, resetBoard };
 })();
+
+GameBoard.resetBoard();
 
 const player1 = Player("Player 1", 1);
 const player2 = Player("Player 2", 2);
