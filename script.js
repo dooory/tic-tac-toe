@@ -65,6 +65,7 @@ const GameController = (() => {
 		console.log(`Starting round ${currentRound}`);
 
 		GameBoard.doMove(tileIndex, getActivePlayer());
+		switchActivePlayer();
 	};
 
 	const startGame = () => {
