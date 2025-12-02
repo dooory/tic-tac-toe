@@ -31,7 +31,7 @@ const GameBoard = (() => {
 
 		if (board[position] !== "") {
 			console.error(
-				`Board Position ${position} is already occupied by ${board[position]}`,
+				`Board Position ${position} is already occupied by ${board[position]}`
 			);
 
 			return false;
@@ -118,6 +118,8 @@ const GameController = (() => {
 			console.log(`The winner is: ${winnerName}!`);
 			console.log(`Winning lines: ${winningLines}`);
 
+			winnerObject.incrementWins();
+
 			endGame();
 
 			return;
@@ -137,12 +139,17 @@ const GameController = (() => {
 	const startGame = () => {
 		setState("playing");
 
-		console.log("Starting new game!");
+		console.log("\nStarting new game!");
 		resetGame();
 	};
 
 	const endGame = () => {
 		console.log("Ending game!");
+
+		console.log("\nCurrent scores:\n");
+		console.log(`${playerList[0].getName()}: ${playerList[0].getWins()}`);
+		console.log(`${playerList[1].getName()}: ${playerList[1].getWins()}`);
+
 		setState("idle");
 	};
 
@@ -161,3 +168,15 @@ let playerList = [];
 
 const player1 = Player("Player 1", 1);
 const player2 = Player("Player 2", 2);
+
+for (let index = 0; index < 3; index++) {
+	GameController.startGame();
+
+	for (let i = 1; i < 9; i++) {
+		if (GameController.getState() == "idle") {
+			break;
+		}
+
+		GameController.playRound(i);
+	}
+}
