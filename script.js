@@ -21,7 +21,7 @@ const GameBoard = (() => {
 
 		if (board[position] !== "") {
 			console.error(
-				`Board Position ${position} is already occupied by ${board[position]}`
+				`Board Position ${position} is already occupied by ${board[position]}`,
 			);
 
 			return false;
