@@ -1,10 +1,16 @@
 function Player(name, id) {
+	let wins = 0;
+
 	const getName = () => name;
 	const getId = () => id;
+	const getWins = () => wins;
+
+	const setWins = (newWins) => (wins = newWins);
+	const incrementWins = () => setWins(getWins() + 1);
 
 	const doMove = (position) => GameBoard.doMove(position, id);
 
-	return { getName, getId, doMove };
+	return { getName, getId, doMove, getWins, incrementWins };
 }
 
 const GameBoard = (() => {
