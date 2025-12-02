@@ -73,6 +73,7 @@ const GameBoard = (() => {
 })();
 
 const GameController = (() => {
+	const roundMax = 9;
 	let round = 0;
 	let state = "idle";
 	let activePlayer = 1;
@@ -103,6 +104,11 @@ const GameController = (() => {
 	};
 
 	const playRound = (tileIndex) => {
+		incrementRound();
+
+		const currentRound = getRound();
+		newRoundMessage(currentRound);
+
 		GameBoard.doMove(Number(tileIndex), getActivePlayer());
 
 		const winningLines = GameBoard.isWinningMove(GameBoard.getBoard());
@@ -119,23 +125,22 @@ const GameController = (() => {
 			return;
 		}
 
-		switchActivePlayer();
-		incrementRound();
+		if (getRound() === roundMax) {
+			console.log(`Its a draw!`);
 
-		const nextRound = getRound() + 1;
-		newRoundMessage(nextRound);
+			endGame();
+
+			return;
+		}
+
+		switchActivePlayer();
 	};
 
 	const startGame = () => {
-		resetGame();
 		setState("playing");
 
 		console.log("Starting new game!");
-		const currentRound = getRound() + 1;
-		newRoundMessage(currentRound);
-
-		console.log(GameBoard.getBoard());
-		console.log("\n");
+		resetGame();
 	};
 
 	const endGame = () => {
@@ -159,12 +164,14 @@ const player2 = Player("Player 2", 2);
 
 GameController.startGame();
 
-for (let i = 0; i < 9; i++) {
-	if (GameController.getState() == "idle") {
-		break;
-	}
+GameController.playRound(0);
+GameController.playRound(2);
+GameController.playRound(1);
+GameController.playRound(3);
+GameController.playRound(5);
+GameController.playRound(4);
+GameController.playRound(6);
+GameController.playRound(7);
+GameController.playRound(8);
 
-	GameController.playRound(i);
-
-	console.log(GameBoard.getBoard());
-}
+console.log(GameBoard.getBoard());
