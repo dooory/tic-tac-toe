@@ -1,5 +1,3 @@
-let playerList = [];
-
 function Player(name, id) {
 	let wins = 0;
 
@@ -159,19 +157,7 @@ const GameController = (() => {
 	};
 })();
 
+let playerList = [];
+
 const player1 = Player("Player 1", 1);
 const player2 = Player("Player 2", 2);
-
-GameController.startGame();
-
-GameController.playRound(0);
-GameController.playRound(2);
-GameController.playRound(1);
-GameController.playRound(3);
-GameController.playRound(5);
-GameController.playRound(4);
-GameController.playRound(6);
-GameController.playRound(7);
-GameController.playRound(8);
-
-console.log(GameBoard.getBoard());
