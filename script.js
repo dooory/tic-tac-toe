@@ -112,8 +112,8 @@ const GameController = (() => {
 		const winningLines = GameBoard.isWinningMove(GameBoard.getBoard());
 
 		if (winningLines) {
-			const winner = playerList[getActivePlayer()];
-			const winnerName = winner.getName();
+			const winnerObject = playerList[getActivePlayer() - 1];
+			const winnerName = winnerObject.getName();
 
 			console.log(`The winner is: ${winnerName}!`);
 			console.log(`Winning lines: ${winningLines}`);
