@@ -98,7 +98,11 @@ const GameController = (() => {
 
 	const newRoundMessage = (round) => {
 		console.log(`Starting round ${round}`);
-		console.log(`It is currently Player ${getActivePlayer()}'s turn`);
+		console.log(
+			`It is currently ${playerList[
+				getActivePlayer() - 1
+			].getName()}'s turn`
+		);
 	};
 
 	const playRound = (tileIndex) => {
