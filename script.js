@@ -1,3 +1,5 @@
+let playerList = [];
+
 function Player(name, id) {
 	let wins = 0;
 
@@ -10,7 +12,11 @@ function Player(name, id) {
 
 	const doMove = (position) => GameBoard.doMove(position, id);
 
-	return { getName, getId, doMove, getWins, incrementWins };
+	let playerObject = { getName, getId, doMove, getWins, incrementWins };
+
+	playerList.push(playerObject);
+
+	return playerObject;
 }
 
 const GameBoard = (() => {
@@ -38,11 +44,32 @@ const GameBoard = (() => {
 		return true;
 	};
 
+	const isWinningMove = (board) => {
+		const winningLines = [
+			[0, 1, 2],
+			[3, 4, 5],
+			[6, 7, 8],
+			[0, 3, 6],
+			[1, 4, 7],
+			[2, 5, 8],
+			[0, 4, 8],
+			[2, 4, 6],
+		];
+
+		for (let i = 0; i < winningLines.length; i++) {
+			let [a, b, c] = winningLines[i];
+
+			if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+				return winningLines[i];
+			}
+		}
+	};
+
 	const resetBoard = () => {
 		board = Array(9).fill("", 0, 9);
 	};
 
-	return { doMove, getBoard, resetBoard };
+	return { doMove, getBoard, resetBoard, isWinningMove };
 })();
 
 const GameController = (() => {
@@ -77,6 +104,21 @@ const GameController = (() => {
 
 	const playRound = (tileIndex) => {
 		GameBoard.doMove(Number(tileIndex), getActivePlayer());
+
+		const winningLines = GameBoard.isWinningMove(GameBoard.getBoard());
+
+		if (winningLines) {
+			const winner = playerList[getActivePlayer()];
+			const winnerName = winner.getName();
+
+			console.log(`The winner is: ${winnerName}!`);
+			console.log(`Winning lines: ${winningLines}`);
+
+			endGame();
+
+			return;
+		}
+
 		switchActivePlayer();
 		incrementRound();
 
@@ -118,11 +160,11 @@ const player2 = Player("Player 2", 2);
 GameController.startGame();
 
 for (let i = 0; i < 9; i++) {
+	if (GameController.getState() == "idle") {
+		break;
+	}
+
 	GameController.playRound(i);
 
 	console.log(GameBoard.getBoard());
 }
-
-GameController.endGame();
-
-GameController.resetGame();
