@@ -74,18 +74,18 @@ const GameController = (() => {
 	const roundMax = 9;
 	let round = 0;
 	let state = "idle";
-	let activePlayer = 1;
+	let activePlayerId = 1;
 
 	const getRound = () => round;
 	const getState = () => state;
-	const getActivePlayer = () => playerList[activePlayer - 1];
+	const getActivePlayer = () => playerList[activePlayerId - 1];
 
 	const setRound = (number) => (round = number);
 	const setState = (newState) => (state = newState);
-	const setActivePlayer = (id) => (activePlayer = id);
+	const setActivePlayer = (id) => (activePlayerId = id);
 
 	const switchActivePlayer = () =>
-		activePlayer === 1 ? (activePlayer = 2) : (activePlayer = 1);
+		activePlayerId === 1 ? (activePlayerId = 2) : (activePlayerId = 1);
 
 	const incrementRound = () => setRound(getRound() + 1);
 
