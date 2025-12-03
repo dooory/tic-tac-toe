@@ -259,8 +259,8 @@ const ScreenController = (() => {
 		player2ScoreDiv.textContent = `${player2.getName()}: ${player2.getWins()}`;
 	};
 
-	const handleTileClick = (element) => {
-		const tile = element.target;
+	const handleTileClick = (event) => {
+		const tile = event.target;
 		const tileIndex = tile.dataset.index;
 
 		const outcome = GameController.playRound(Number(tileIndex));
