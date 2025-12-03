@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -7,29 +7,34 @@
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="favicon/apple-touch-icon.png"
-		/>
+			href="favicon/apple-touch-icon.png" />
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="32x32"
-			href="favicon/favicon-32x32.png"
-		/>
+			href="favicon/favicon-32x32.png" />
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="16x16"
-			href="favicon/favicon-16x16.png"
-		/>
+			href="favicon/favicon-16x16.png" />
 		<link rel="manifest" href="favicon/site.webmanifest" />
 
 		<script src="script.js" defer></script>
 	</head>
 	<body>
 		<div class="wrapper">
-			<div class="game-status"></div>
-			<div class="board"></div>
-			<div class="game-controls"></div>
+			<div class="game-status">
+				<h1 class="player-turn">Currently Player 1's turn</h1>
+				<div class="score-board">
+					<div class="player1-score">
+						<h2 class="score">Player 1: 0</h2>
+					</div>
+					<div class="player2-score">
+						<h2 class="score">Player 2: 0</h2>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
