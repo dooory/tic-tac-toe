@@ -84,7 +84,7 @@ const GameController = (() => {
 	const roundMax = 9;
 	let round = 0;
 	let state = "idle";
-	let activePlayerId = 1;
+	let activePlayerId = 0;
 	let lastMatchOutcome;
 
 	const getRound = () => round;
@@ -96,7 +96,7 @@ const GameController = (() => {
 	const setActivePlayer = (id) => (activePlayerId = id);
 
 	const switchActivePlayer = () =>
-		activePlayerId === 1 ? (activePlayerId = 2) : (activePlayerId = 1);
+		activePlayerId === 0 ? (activePlayerId = 1) : (activePlayerId = 0);
 
 	const incrementRound = () => setRound(getRound() + 1);
 
@@ -202,8 +202,8 @@ const GameController = (() => {
 
 let playerList = [];
 
-const player1 = Player("John", 1, "X");
-const player2 = Player("Simon", 2, "O");
+const player1 = Player("John", 0, "X");
+const player2 = Player("Simon", 1, "O");
 
 const ScreenController = (() => {
 	const gameStateDiv = document.querySelector(".game-state");
