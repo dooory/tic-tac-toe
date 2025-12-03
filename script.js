@@ -31,7 +31,7 @@ const GameBoard = (() => {
 	const getBoard = () => board;
 
 	const doMove = (position, playerShape) => {
-		if (GameController.getState() === "idle") {
+		if (!GameController.isInRound()) {
 			console.error("Game is currently in an idle state");
 
 			return false;
@@ -83,7 +83,7 @@ const GameBoard = (() => {
 const GameController = (() => {
 	const roundMax = 9;
 	let round = 0;
-	let state = "idle";
+	let state = "firstround";
 	let activePlayerId = 0;
 
 	const getRound = () => round;
@@ -107,13 +107,16 @@ const GameController = (() => {
 		GameBoard.resetBoard();
 	};
 
+	const isInRound = () =>
+		state === "firstround" || state === "idle" ? false : true;
+
 	const newRoundMessage = (round) => {
 		console.log(`Starting round ${round}`);
 		console.log(`It is currently ${getActivePlayer().getName()}'s turn`);
 	};
 
 	const playRound = (tileIndex) => {
-		if (getState() === "idle") {
+		if (!isInRound()) {
 			console.error("Game is currently in an idle state");
 
 			return;
@@ -196,6 +199,7 @@ const GameController = (() => {
 		startGame,
 		endGame,
 		playRound,
+		isInRound,
 	};
 })();
 
@@ -246,8 +250,10 @@ const ScreenController = (() => {
 			gameStateDiv.textContent = `It's currently ${GameController.getActivePlayer().getName()}'s turn`;
 		}
 
-		if (currentGameState === "idle") {
-			startGameButton.textContent = "Start New Round!";
+		if (!GameController.isInRound) {
+			if (GameController.getState() === "idle") {
+				startGameButton.textContent = "Start New Round!";
+			}
 
 			if (matchOutcome === "Draw") {
 				gameStateDiv.textContent = `It's a draw!`;
