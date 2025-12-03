@@ -178,10 +178,10 @@ let playerList = [];
 const player1 = Player("John", 1, "X");
 const player2 = Player("Simon", 2, "O");
 
-for (let index = 0; index < 3; index++) {
+for (let index = 0; index < 1; index++) {
 	GameController.startGame();
 
-	for (let i = 1; i < 9; i++) {
+	for (let i = 0; i < 9; i++) {
 		if (GameController.getState() == "idle") {
 			break;
 		}
