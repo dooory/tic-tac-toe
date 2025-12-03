@@ -242,6 +242,8 @@ const ScreenController = (() => {
 		const currentGameState = GameController.getState();
 
 		if (currentGameState === "playing") {
+			startGameButton.textContent = "Restart!";
+
 			gameStateDiv.textContent = `It's currently ${GameController.getActivePlayer().getName()}'s turn`;
 		}
 
