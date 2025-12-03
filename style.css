@@ -13,29 +13,35 @@ body {
 }
 
 .wrapper {
-	display: grid;
-	grid-auto-columns: auto;
+	display: flex;
+	flex-direction: column;
 
 	gap: 1rem;
 
-	justify-content: center;
+	justify-content: flex-start;
+	align-items: center;
 
 	padding: 1rem;
 }
 
+.game-status,
+.game-board,
+.game-controls {
+	flex: 0 1 100px;
+}
+
 .game-status {
 	text-align: center;
-
-	grid-area: "game-status";
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 
 .game-state {
 	background-color: rgb(35 35 35);
 	padding: 1rem;
 	border-radius: 1rem;
-	width: fit-content;
-	margin-left: auto;
-	margin-right: auto;
+	flex: 0;
 }
 
 .game-status .score-board {
@@ -59,7 +65,6 @@ body {
 }
 
 .game-board {
-	grid-area: "game-board";
 	background-color: rgb(35 35 35);
 	border-radius: 0.5rem;
 
@@ -86,7 +91,7 @@ body {
 	border: 3px solid rgb(60 60 200 / 80%);
 }
 
-.winning-tile {
+.tile-button.winning-tile {
 	border: 3px solid rgb(60 200 60 / 80%);
 }
 

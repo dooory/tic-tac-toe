@@ -268,6 +268,19 @@ const ScreenController = (() => {
 			if (matchOutcome === "Draw") {
 				gameStateDiv.textContent = `It's a draw!`;
 			} else if (matchOutcome === "Win") {
+				const winningLines = GameBoard.isWinningMove(
+					GameBoard.getBoard()
+				);
+
+				console.log(winningLines);
+
+				const currentTileButtons =
+					boardDiv.querySelectorAll(".tile-button");
+
+				winningLines.forEach((element, index) => {
+					currentTileButtons[element].classList.add("winning-tile");
+				});
+
 				const winner = GameController.getActivePlayer();
 				gameStateDiv.textContent = `${winner.getName()} has won!`;
 			}
