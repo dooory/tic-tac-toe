@@ -293,6 +293,8 @@ const ScreenController = (() => {
 		customizationDialog.close();
 
 		updateScreen();
+
+		startGameButton.textContent = "Start!";
 	};
 
 	startGameButton.addEventListener("click", handleStartClick);
