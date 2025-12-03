@@ -104,7 +104,7 @@ const GameController = (() => {
 		console.log("Resetting game!");
 
 		setRound(0);
-		setActivePlayer(1);
+		setActivePlayer(0);
 		GameBoard.resetBoard();
 	};
 
@@ -248,7 +248,7 @@ const ScreenController = (() => {
 		}
 
 		if (currentGameState === "idle") {
-			console.log(matchOutcome);
+			startGameButton.textContent = "Start!";
 
 			if (matchOutcome === "Draw") {
 				gameStateDiv.textContent = `It's a draw!`;
