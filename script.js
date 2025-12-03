@@ -111,6 +111,30 @@ const GameController = (() => {
 	};
 
 	const playRound = (tileIndex) => {
+		if (getState() === "idle") {
+			console.error("Game is currently in an idle state");
+
+			return;
+		}
+
+		if (typeof tileIndex !== "number") {
+			console.error(
+				`Tileindex must be of type number not <${typeof tileIndex}>`
+			);
+
+			return;
+		}
+
+		if (GameBoard.getBoard()[tileIndex]) {
+			console.error(
+				`Tileindex <${tileIndex}> is already occupied by <${
+					GameBoard.getBoard()[tileIndex]
+				}>`
+			);
+
+			return;
+		}
+
 		incrementRound();
 
 		const currentRound = getRound();
