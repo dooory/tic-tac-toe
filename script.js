@@ -202,10 +202,11 @@ const GameController = (() => {
 
 let playerList = [];
 
-const player1 = Player("John", 0, "X");
-const player2 = Player("Simon", 1, "O");
-
 const ScreenController = (() => {
+	const customizationDialog = document.querySelector("#match-customization");
+	const pickNamesForm = document.getElementById("pick-your-names");
+	const submitNamesButton = document.querySelector("submit-names");
+
 	const gameStateDiv = document.querySelector(".game-state");
 	const player1ScoreDiv = document.querySelector(".player1-score > .score");
 	const player2ScoreDiv = document.querySelector(".player2-score > .score");
@@ -255,8 +256,8 @@ const ScreenController = (() => {
 			}
 		}
 
-		player1ScoreDiv.textContent = `${player1.getName()}: ${player1.getWins()}`;
-		player2ScoreDiv.textContent = `${player2.getName()}: ${player2.getWins()}`;
+		player1ScoreDiv.textContent = `${playerList[0].getName()}: ${playerList[0].getWins()}`;
+		player2ScoreDiv.textContent = `${playerList[1].getName()}: ${playerList[1].getWins()}`;
 	};
 
 	const handleTileClick = (event) => {
@@ -274,8 +275,25 @@ const ScreenController = (() => {
 		updateScreen();
 	};
 
+	const handlePickingNames = (event) => {
+		const formData = new FormData(pickNamesForm, submitNamesButton);
+		const names = Object.fromEntries(formData);
+
+		const player1Name = names["player1Name"];
+		const player2Name = names["player2Name"];
+
+		Player(player1Name, 0, "X");
+		Player(player2Name, 1, "O");
+
+		event.preventDefault();
+
+		customizationDialog.close();
+	};
+
 	startGameButton.addEventListener("click", handleStartClick);
-	updateScreen();
+	customizationDialog.showModal();
+
+	pickNamesForm.addEventListener("submit", handlePickingNames);
 
 	return {
 		updateScreen,
