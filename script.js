@@ -85,6 +85,7 @@ const GameController = (() => {
 	let round = 0;
 	let state = "idle";
 	let activePlayerId = 1;
+	let lastMatchOutcome;
 
 	const getRound = () => round;
 	const getState = () => state;
@@ -157,7 +158,7 @@ const GameController = (() => {
 
 			endGame();
 
-			return;
+			return "Win";
 		}
 
 		if (getRound() === roundMax) {
@@ -204,14 +205,79 @@ let playerList = [];
 const player1 = Player("John", 1, "X");
 const player2 = Player("Simon", 2, "O");
 
-for (let index = 0; index < 1; index++) {
-	GameController.startGame();
+const ScreenController = (() => {
+	const gameStateDiv = document.querySelector(".game-state");
+	const player1ScoreDiv = document.querySelector(".player1-score > .score");
+	const player2ScoreDiv = document.querySelector(".player2-score > .score");
 
-	for (let i = 0; i < 9; i++) {
-		if (GameController.getState() == "idle") {
-			break;
+	const boardDiv = document.querySelector(".game-board");
+
+	const startGameButton = document.querySelector(".start-button");
+
+	const clearScreen = () => (boardDiv.textContent = "");
+
+	const createTileButton = (content, index) => {
+		let tileButton = document.createElement("button");
+		tileButton.classList.add("tile-button");
+		tileButton.textContent = content;
+		tileButton.dataset.index = index;
+
+		tileButton.addEventListener("click", handleTileClick);
+
+		boardDiv.appendChild(tileButton);
+	};
+
+	const updateScreen = (matchOutcome) => {
+		clearScreen();
+
+		const currentBoard = GameBoard.getBoard();
+
+		for (let index = 0; index < currentBoard.length; index++) {
+			const tileContent = currentBoard[index];
+
+			createTileButton(tileContent, index);
 		}
 
-		GameController.playRound(i);
-	}
-}
+		const currentGameState = GameController.getState();
+
+		if (currentGameState === "playing") {
+			gameStateDiv.textContent = `It's currently ${GameController.getActivePlayer().getName()}'s turn`;
+		}
+
+		if (currentGameState === "idle") {
+			console.log(matchOutcome);
+
+			if (matchOutcome === "Draw") {
+				gameStateDiv.textContent = `It's a draw!`;
+			} else if (matchOutcome === "Win") {
+				const winner = GameController.getActivePlayer();
+				gameStateDiv.textContent = `${winner.getName()} has won!`;
+			}
+		}
+
+		player1ScoreDiv.textContent = `${player1.getName()}: ${player1.getWins()}`;
+		player2ScoreDiv.textContent = `${player2.getName()}: ${player2.getWins()}`;
+	};
+
+	const handleTileClick = (element) => {
+		const tile = element.target;
+		const tileIndex = tile.dataset.index;
+
+		const outcome = GameController.playRound(Number(tileIndex));
+
+		updateScreen(outcome);
+	};
+
+	const handleStartClick = (element) => {
+		GameController.startGame();
+
+		updateScreen();
+	};
+
+	startGameButton.addEventListener("click", handleStartClick);
+	updateScreen();
+
+	return {
+		updateScreen,
+	};
+})();
