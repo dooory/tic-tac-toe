@@ -108,7 +108,8 @@ const GameController = (() => {
 		const currentRound = getRound();
 		newRoundMessage(currentRound);
 
-		getActivePlayer().doMove(Number(tileIndex));
+		const activePlayer = getActivePlayer();
+		activePlayer.doMove(Number(tileIndex));
 
 		const winningLines = GameBoard.isWinningMove(GameBoard.getBoard());
 
