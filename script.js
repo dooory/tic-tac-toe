@@ -191,12 +191,21 @@ const GameController = (() => {
 		setState("idle");
 	};
 
+	const fullyResetGame = () => {
+		resetGame();
+
+		console.log("Fully resetting game!");
+
+		setState("firstround");
+	};
+
 	return {
 		getRound,
 		getState,
 		getActivePlayer,
 		resetGame,
 		startGame,
+		fullyResetGame,
 		endGame,
 		playRound,
 		isInRound,
@@ -217,6 +226,7 @@ const ScreenController = (() => {
 	const boardDiv = document.querySelector(".game-board");
 
 	const startGameButton = document.querySelector(".start-button");
+	const resetGameButton = document.querySelector(".reset-button");
 
 	const clearScreen = () => (boardDiv.textContent = "");
 
@@ -282,6 +292,12 @@ const ScreenController = (() => {
 		updateScreen();
 	};
 
+	const handleResetClick = () => {
+		customizationDialog.showModal();
+
+		updateScreen();
+	};
+
 	const handlePickingNames = (event) => {
 		const formData = new FormData(pickNamesForm, submitNamesButton);
 		const names = Object.fromEntries(formData);
@@ -297,12 +313,15 @@ const ScreenController = (() => {
 		pickNamesForm.reset();
 		customizationDialog.close();
 
+		GameController.fullyResetGame();
+
 		updateScreen();
 
 		startGameButton.textContent = "Start!";
 	};
 
 	startGameButton.addEventListener("click", handleStartClick);
+	resetGameButton.addEventListener("click", handleResetClick);
 	customizationDialog.showModal();
 
 	pickNamesForm.addEventListener("submit", handlePickingNames);
