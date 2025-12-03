@@ -85,7 +85,6 @@ const GameController = (() => {
 	let round = 0;
 	let state = "idle";
 	let activePlayerId = 0;
-	let lastMatchOutcome;
 
 	const getRound = () => round;
 	const getState = () => state;
