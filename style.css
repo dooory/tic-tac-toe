@@ -1,0 +1,14 @@
+:root {
+	--tile-size: 6rem;
+}
+
+.game-board {
+	display: grid;
+	grid-template: repeat(3, var(--tile-size)) / repeat(3, var(--tile-size));
+	gap: 1rem;
+	font-size: 3rem;
+}
+
+.tile-button {
+	font-size: calc(var(--tile-size) * 0.7);
+}
