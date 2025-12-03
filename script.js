@@ -165,7 +165,7 @@ const GameController = (() => {
 
 			endGame();
 
-			return;
+			return "Draw";
 		}
 
 		switchActivePlayer();
