@@ -268,7 +268,7 @@ const ScreenController = (() => {
 		updateScreen(outcome);
 	};
 
-	const handleStartClick = (element) => {
+	const handleStartClick = () => {
 		GameController.startGame();
 
 		updateScreen();
