@@ -20,7 +20,7 @@ function Player(name, id, shape) {
 		getShape,
 	};
 
-	playerList.push(playerObject);
+	playerList[id] = playerObject;
 
 	return playerObject;
 }
