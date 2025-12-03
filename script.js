@@ -248,7 +248,7 @@ const ScreenController = (() => {
 		}
 
 		if (currentGameState === "idle") {
-			startGameButton.textContent = "Start!";
+			startGameButton.textContent = "Start New Round!";
 
 			if (matchOutcome === "Draw") {
 				gameStateDiv.textContent = `It's a draw!`;
