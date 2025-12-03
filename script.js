@@ -75,6 +75,8 @@ const GameBoard = (() => {
 		board = Array(9).fill("", 0, 9);
 	};
 
+	resetBoard();
+
 	return { doMove, getBoard, resetBoard, isWinningMove };
 })();
 
