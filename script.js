@@ -250,7 +250,7 @@ const ScreenController = (() => {
 			gameStateDiv.textContent = `It's currently ${GameController.getActivePlayer().getName()}'s turn`;
 		}
 
-		if (!GameController.isInRound) {
+		if (!GameController.isInRound()) {
 			if (GameController.getState() === "idle") {
 				startGameButton.textContent = "Start New Round!";
 			}
