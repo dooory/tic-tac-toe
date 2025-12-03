@@ -289,7 +289,10 @@ const ScreenController = (() => {
 
 		event.preventDefault();
 
+		pickNamesForm.reset();
 		customizationDialog.close();
+
+		updateScreen();
 	};
 
 	startGameButton.addEventListener("click", handleStartClick);
