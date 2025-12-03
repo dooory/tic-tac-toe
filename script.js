@@ -1,16 +1,24 @@
-function Player(name, id) {
+function Player(name, id, shape) {
 	let wins = 0;
 
 	const getName = () => name;
 	const getId = () => id;
 	const getWins = () => wins;
+	const getShape = () => shape;
 
 	const setWins = (newWins) => (wins = newWins);
 	const incrementWins = () => setWins(getWins() + 1);
 
-	const doMove = (position) => GameBoard.doMove(position, id);
+	const doMove = (position) => GameBoard.doMove(position, shape);
 
-	let playerObject = { getName, getId, doMove, getWins, incrementWins };
+	let playerObject = {
+		getName,
+		getId,
+		doMove,
+		getWins,
+		incrementWins,
+		getShape,
+	};
 
 	playerList.push(playerObject);
 
@@ -22,7 +30,7 @@ const GameBoard = (() => {
 
 	const getBoard = () => board;
 
-	const doMove = (position, playerId) => {
+	const doMove = (position, playerShape) => {
 		if (GameController.getState() === "idle") {
 			console.error("Game is currently in an idle state");
 
@@ -37,7 +45,7 @@ const GameBoard = (() => {
 			return false;
 		}
 
-		board[position] = playerId;
+		board[position] = playerShape;
 
 		return true;
 	};
@@ -167,8 +175,8 @@ const GameController = (() => {
 
 let playerList = [];
 
-const player1 = Player("John", 1);
-const player2 = Player("Simon", 2);
+const player1 = Player("John", 1, "X");
+const player2 = Player("Simon", 2, "O");
 
 for (let index = 0; index < 3; index++) {
 	GameController.startGame();
