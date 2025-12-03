@@ -89,7 +89,7 @@ const GameController = (() => {
 
 	const getRound = () => round;
 	const getState = () => state;
-	const getActivePlayer = () => playerList[activePlayerId - 1];
+	const getActivePlayer = () => playerList[activePlayerId];
 
 	const setRound = (number) => (round = number);
 	const setState = (newState) => (state = newState);
