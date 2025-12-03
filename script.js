@@ -78,7 +78,7 @@ const GameController = (() => {
 
 	const getRound = () => round;
 	const getState = () => state;
-	const getActivePlayer = () => activePlayer;
+	const getActivePlayer = () => playerList[activePlayer - 1];
 
 	const setRound = (number) => (round = number);
 	const setState = (newState) => (state = newState);
@@ -86,6 +86,7 @@ const GameController = (() => {
 
 	const switchActivePlayer = () =>
 		activePlayer === 1 ? (activePlayer = 2) : (activePlayer = 1);
+
 	const incrementRound = () => setRound(getRound() + 1);
 
 	const resetGame = () => {
@@ -98,11 +99,7 @@ const GameController = (() => {
 
 	const newRoundMessage = (round) => {
 		console.log(`Starting round ${round}`);
-		console.log(
-			`It is currently ${playerList[
-				getActivePlayer() - 1
-			].getName()}'s turn`
-		);
+		console.log(`It is currently ${getActivePlayer().getName()}'s turn`);
 	};
 
 	const playRound = (tileIndex) => {
@@ -111,18 +108,17 @@ const GameController = (() => {
 		const currentRound = getRound();
 		newRoundMessage(currentRound);
 
-		GameBoard.doMove(Number(tileIndex), getActivePlayer());
+		getActivePlayer().doMove(Number(tileIndex));
 
 		const winningLines = GameBoard.isWinningMove(GameBoard.getBoard());
 
 		if (winningLines) {
-			const winnerObject = playerList[getActivePlayer() - 1];
-			const winnerName = winnerObject.getName();
+			const winnerName = getActivePlayer().getName();
 
 			console.log(`The winner is: ${winnerName}!`);
 			console.log(`Winning lines: ${winningLines}`);
 
-			winnerObject.incrementWins();
+			getActivePlayer().incrementWins();
 
 			endGame();
 
@@ -170,8 +166,8 @@ const GameController = (() => {
 
 let playerList = [];
 
-const player1 = Player("Player 1", 1);
-const player2 = Player("Player 2", 2);
+const player1 = Player("John", 1);
+const player2 = Player("Simon", 2);
 
 for (let index = 0; index < 3; index++) {
 	GameController.startGame();
