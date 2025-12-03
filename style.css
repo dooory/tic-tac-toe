@@ -1,20 +1,118 @@
 html {
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	color: aliceblue;
+}
+
+html,
+body {
+	margin: 0;
 }
 
 :root {
 	--tile-size: 6rem;
 }
 
+.wrapper {
+	display: grid;
+	grid-auto-columns: auto;
+
+	gap: 1rem;
+
+	justify-content: center;
+
+	padding: 1rem;
+}
+
+.game-status {
+	text-align: center;
+
+	grid-area: "game-status";
+}
+
+.game-state {
+	background-color: rgb(35 35 35);
+	padding: 1rem;
+	border-radius: 1rem;
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.game-status .score-board {
+	display: grid;
+	gap: 0.5rem;
+
+	padding: 0.5rem 1rem;
+	background-color: rgb(35 35 35);
+
+	border-radius: 1rem;
+}
+
+.game-status .score-board>h1 {
+	margin: 0;
+	padding: 0.5rem;
+}
+
+.game-status .scores-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
 .game-board {
+	grid-area: "game-board";
+	background-color: rgb(35 35 35);
+	border-radius: 0.5rem;
+
+	padding: 1rem;
+
 	display: grid;
 	grid-template: repeat(3, var(--tile-size)) / repeat(3, var(--tile-size));
 	gap: 1rem;
 	font-size: 3rem;
+
+	justify-content: center;
 }
 
 .tile-button {
 	font-size: calc(var(--tile-size) * 0.7);
+
+	background-color: aliceblue;
+	color: rgb(35 35 35);
+	border-radius: 0.5rem;
+	border: transparent;
+}
+
+.tile-button:hover {
+	border: 3px solid rgb(60 60 200 / 80%);
+}
+
+.winning-tile {
+	border: 3px solid rgb(60 200 60 / 80%);
+}
+
+.game-controls {
+	grid-area: "game-controls";
+
+	justify-content: center;
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(2, minmax(min(130px, 100%), 170px));
+}
+
+.start-button,
+.reset-button {
+	height: 4rem;
+	font-size: 1rem;
+	background-color: rgb(35 35 35);
+	border-radius: 1rem;
+	border: none;
+	color: aliceblue;
+}
+
+.start-button:hover,
+.reset-button:hover,
+.submit-names:hover {
+	outline: 1px solid rgb(35 35 35 / 50%);
 }
 
 #match-customization {
@@ -28,9 +126,16 @@ html {
 #pick-your-names {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	gap: 1rem;
 }
 
 .submit-names {
-	flex: 0;
+	height: 2rem;
+	font-size: 1rem;
+	background-color: rgb(35 35 35);
+	border-radius: 0.5rem;
+	width: min(100%, 100px);
+	border: none;
+	color: aliceblue;
 }

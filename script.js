@@ -318,6 +318,7 @@ const ScreenController = (() => {
 		updateScreen();
 
 		startGameButton.textContent = "Start!";
+		gameStateDiv.textContent = "Press start to begin!";
 	};
 
 	startGameButton.addEventListener("click", handleStartClick);
